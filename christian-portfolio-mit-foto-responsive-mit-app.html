@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+
+<html lang="de">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Christian Kliwar - Portfolio</title>
+<style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f3460 0%, #16537e 50%, #1e88e5 100%);
+            background-attachment: fixed;
+            color: #ffffff;
+            line-height: 1.6;
+        }
+
+        /* Network Animation Background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(90deg, transparent 98%, rgba(0, 255, 255, 0.1) 100%),
+                linear-gradient(0deg, transparent 98%, rgba(0, 255, 255, 0.1) 100%);
+            background-size: 100px 100px;
+            animation: networkMove 20s linear infinite;
+            z-index: -1;
+            opacity: 0.3;
+        }
+
+        @keyframes networkMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(100px, 100px); }
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 25, 47, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid #00d4ff;
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: #00ffff;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        nav a:hover, nav a.active {
+            background: rgba(0, 212, 255, 0.2);
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.4);
+            color: #ffffff;
+        }
+
+        /* Sections */
+        section {
+            min-height: 100vh;
+            padding: 6rem 2rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 8rem 2rem 2rem;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            color: #00ffff;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 20px #00ffff;
+            animation: titlePulse 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes titlePulse {
+            from { text-shadow: 0 0 20px #00ffff; }
+            to { text-shadow: 0 0 40px #00ffff, 0 0 60px #00d4ff; }
+        }
+
+        .hero .subtitle {
+            font-size: 1.5rem;
+            color: #e0f7ff;
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+
+        .hero .description {
+            font-size: 1.2rem;
+            color: #b3e5ff;
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            line-height: 1.8;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(45deg, #003d5c, #0099cc);
+            color: #ffffff;
+            padding: 1rem 2rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            border: 2px solid #00d4ff;
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.4);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.8);
+            background: linear-gradient(45deg, #0099cc, #00ffff);
+            color: #003d5c;
+        }
+
+        /* Content Sections */
+        .section-title {
+            font-size: 2.5rem;
+            color: #00ffff;
+            text-align: center;
+            margin-bottom: 3rem;
+            text-shadow: 0 0 15px #00ffff;
+        }
+
+        .grid {
+            display: grid;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .grid-2 { grid-template-columns: repeat(auto-fit, minmax(500px, 1fr)); }
+        .grid-3 { grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); }
+
+        .card {
+            background: rgba(10, 25, 47, 0.8);
+            border: 2px solid #00d4ff;
+            border-radius: 15px;
+            padding: 2rem;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.1), transparent);
+            animation: cardScan 6s infinite;
+        }
+
+        @keyframes cardScan {
+            0% { left: -100%; }
+            50% { left: 100%; }
+            100% { left: -100%; }
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.5);
+            border-color: #00ffff;
+        }
+
+        .card h3 {
+            color: #00ffff;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 10px #00ffff;
+        }
+
+        .card p, .card li {
+            color: #e0f7ff;
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .card li::before {
+            content: '▸';
+            color: #00d4ff;
+            margin-right: 0.5rem;
+        }
+
+        /* Skills Section */
+        .skill-item {
+            background: rgba(5, 15, 35, 0.9);
+            border: 1px solid #0099cc;
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .skill-item:hover {
+            background: rgba(0, 153, 204, 0.2);
+            border-color: #00ffff;
+            transform: scale(1.05);
+        }
+
+        .skill-item h4 {
+            color: #00ffff;
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        /* Projects Section */
+        .project-demo {
+            background: rgba(5, 15, 35, 0.9);
+            border: 2px solid #00d4ff;
+            border-radius: 10px;
+            padding: 1rem;
+            margin-top: 1rem;
+            text-align: center;
+        }
+
+        .demo-button {
+            background: linear-gradient(45deg, #0066a3, #00d4ff);
+            color: #ffffff;
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+        }
+
+        .demo-button:hover {
+            background: linear-gradient(45deg, #00ffff, #ffffff);
+            color: #003d5c;
+            transform: scale(1.05);
+        }
+
+        /* Contact Section */
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .contact-item {
+            background: rgba(10, 25, 47, 0.8);
+            border: 2px solid #00d4ff;
+            border-radius: 15px;
+            padding: 2rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .contact-item:hover {
+            box-shadow: 0 0 25px rgba(0, 255, 255, 0.6);
+        }
+
+        .contact-item h4 {
+            color: #00ffff;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .contact-item a {
+            color: #e0f7ff;
+            text-decoration: none;
+        }
+
+        .contact-item a:hover {
+            color: #00ffff;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .hero .subtitle { font-size: 1.2rem; }
+            .section-title { font-size: 2rem; }
+            nav ul { flex-wrap: wrap; gap: 1rem; }
+            .grid-2, .grid-3 { grid-template-columns: 1fr; }
+        }
+
+        /* Smooth Scrolling */
+        html { scroll-behavior: smooth; }
+    
+    /* Profilbild Styling */
+    .hero img {
+        display: block;
+        margin: 0 auto 20px auto;
+        max-width: 250px;
+        width: 100%;
+        height: auto;
+        border-radius: 15px;
+        box-shadow: 0 0 15px rgba(0,255,255,0.6);
+    }
+
+    @media (max-width: 768px) {
+        .hero img {
+            max-width: 180px;
+            margin-bottom: 15px;
+        }
+    }
+    </style>
+</head>
+<body>
+<!-- Navigation -->
+<nav>
+<ul>
+<li><a class="nav-link active" href="#home">Home</a></li>
+<li><a class="nav-link" href="#about">Über mich</a></li>
+<li><a class="nav-link" href="#skills">Skills</a></li>
+<li><a class="nav-link" href="#projects">Projekte</a></li>
+<li><a class="nav-link" href="#contact">Kontakt</a></li>
+</ul>
+</nav>
+<!-- Hero Section -->
+<section class="hero" id="home">
+<div class="container"><img alt="Christian Kliwar" src="Christian_Kliwar-.jpg"/>
+<h1>Christian Kliwar</h1>
+<p class="subtitle">Field Service Engineer</p>
+<p class="description">
+                Mit über 30 Jahren Erfahrung in der Telekommunikation und Informationstechnik verbinde ich traditionelle Elektronik-Expertise 
+                mit modernen Cloud-Technologien. Spezialisiert auf AWS-Infrastrukturen, KI-Anwendungen und innovative 
+                Netzwerklösungen.
+            </p>
+<a class="cta-button" href="#projects">Projekte ansehen</a>
+</div>
+</section>
+<!-- About Section -->
+<section id="about">
+<div class="container">
+<h2 class="section-title">Über mich</h2>
+<div class="grid grid-2">
+<div class="card">
+<h3>Beruflicher Werdegang</h3>
+<p>
+                        Als Kommunikationselektroniker mit Fachrichtung Informationstechnik (Abschluss 1993 bei Frankfurt BW 5) 
+                        bringe ich jahrzehntelange Erfahrung in der Telekommunikations- und IT-Branche mit. Meine Expertise 
+                        bezieht sich auf Hardware-nahe Systeme.
+                    </p>
+<p>
+                        Aktuell erweitere ich kontinuierlich meine Fähigkeiten im Bereich künstlicher Intelligenz und 
+                        Cloud-Computing, um innovative Lösungen für komplexe technische Herausforderungen zu entwickeln.
+                    </p>
+</div>
+<div class="card">
+<h3>Aktuelle Weiterbildung</h3>
+<ul>
+<li>Teilnahme am Outskill Mastermind Kurs</li>
+<li>Entwicklung von KI-gestützten Webanwendungen</li>
+<li>AWS Cloud Architecture &amp; Deployment</li>
+<li>Kontinuierliche Fortbildung in modernen Web-Technologien</li>
+<li>Fokus auf User Experience und responsive Design</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<!-- Skills Section -->
+<section id="skills">
+<div class="container">
+<h2 class="section-title">Skills &amp; Zertifikationen</h2>
+<div class="grid grid-3">
+<div class="skill-item">
+<h4>☁️ Cloud Computing</h4>
+<p>AWS Cloud Practitioner</p>
+<p>grundlegende Konzepte der AWS Cloud</p>
+<p>Architektur, Services und Abrechnung</p>
+</div>
+<div class="skill-item">
+<h4>🔧 Hardware &amp; Systeme</h4>
+<p>SmartAX MA5600 First Line Maintenance</p>
+<p>OSN Series (1500/2500/3500/7500)</p>
+<p>BWS1600G First Line Maintenance</p>
+</div>
+<div class="skill-item">
+<h4>💻 Web Development</h4>
+<p>HTML5, CSS3, JavaScript</p>
+<p>Responsive Design</p>
+<p>Progressive Web Apps</p>
+</div>
+<div class="skill-item">
+<h4>🤖 AI &amp; Machine Learning</h4>
+<p>KI-gestützte Anwendungsentwicklung</p>
+<p>Prompt Engineering</p>
+<p>Automatisierung von Workflows</p>
+</div>
+<div class="skill-item">
+<h4>🌐 Netzwerktechnik</h4>
+<p>Telekommunikationssysteme</p>
+<p>First Line Maintenance</p>
+<p>Netzwerk-Troubleshooting</p>
+</div>
+<div class="skill-item">
+<h4>📊 Projektmanagement</h4>
+<p>Agile Methoden</p>
+<p>Kontinuierliche Weiterbildung</p>
+<p>Mastermind-Programme</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Projects Section -->
+<section id="projects">
+<div class="container">
+<h2 class="section-title">Aktuelle Projekte</h2>
+<div class="grid grid-2">
+<div class="card">
+<h3>🔗 KI Produktivitäts-Netzwerk App</h3>
+<p>
+                        Eine innovative Webanwendung, die KI-gestützte Produktivitäts-Tipps in einem futuristischen 
+                        Design präsentiert. Die App nutzt moderne Web-Technologien und ein ansprechendes UI/UX-Design 
+                        mit Netzwerk-Animationen.
+                    </p>
+<div class="project-demo">
+<p><strong>Technologien:</strong> HTML5, CSS3, JavaScript, Responsive Design</p>
+<p><strong>Features:</strong> Dynamische Tipps, Futuristische Animationen, Mobile-optimiert</p>
+<button class="demo-button" onclick="window.open('productivity-tips-app.html', '_blank')">Live Demo</button>
+</div>
+</div>
+<div class="card">
+<h3>🌐 AWS Landing Page (kliwar.de)</h3>
+<p>
+                        Professionelle Landing Page, deployed über AWS-Infrastructure. Zeigt moderne Cloud-Deployment-Praktiken 
+                        und serverlose Architekturen. Optimiert für Performance und Skalierbarkeit.
+                    </p>
+<div class="project-demo">
+<p><strong>Technologien:</strong> AWS, HTML/CSS, Cloud Deployment</p>
+<p><strong>Features:</strong> Serverless Hosting, CDN Integration, SSL-Verschlüsselung</p>
+<button class="demo-button" onclick="window.open('https://kliwar.de', '_blank')">Website besuchen</button>
+</div>
+</div>
+<div class="card">
+<h3>📚 Outskill Mastermind Programm</h3>
+<p>
+                        Aktive Teilnahme an einem fortgeschrittenen Mastermind-Kurs zur Weiterentwicklung von 
+                        Fähigkeiten in modernen Technologien, Projektmanagement und persönlicher Entwicklung.
+                    </p>
+<div class="project-demo">
+<p><strong>Schwerpunkte:</strong> Skill Development, Networking, Best Practices</p>
+<p><strong>Status:</strong> Laufende Teilnahme und kontinuierliche Weiterbildung</p>
+</div>
+</div>
+<div class="card">
+<h3>🔧 Maintenance &amp; Support Services</h3>
+<p>
+                        Professionelle First Line Maintenance für verschiedene Telekommunikationssysteme. 
+                        Spezialisiert auf kritische Infrastruktur und schnelle Problemlösung.
+                    </p>
+<div class="project-demo">
+<p><strong>Systeme:</strong> SmartAX MA5600, OSN Series, BWS1600G</p>
+<p><strong>Expertise:</strong> Fehlerdiagnose, Wartung, System-Optimierung</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Contact Section -->
+<section id="contact">
+<div class="container">
+<h2 class="section-title">Kontakt</h2>
+<div class="contact-info">
+<div class="contact-item">
+<h4>🌐 Website</h4>
+<p><a href="https://kliwar.de" target="_blank">kliwar.de</a></p>
+</div>
+<div class="contact-item">
+<h4>📧 E-Mail</h4>
+<p><a href="mailto:kliwar@gmx.de">Kliwar@gmx.de</a></p>
+</div>
+<div class="contact-item">
+<h4>💼 LinkedIn</h4>
+<p><a href="https://linkedin.com/in/christian-kliwar-4b79502b2" target="_blank">Christian Kliwar</a></p>
+</div>
+<div class="contact-item">
+<h4>📱 Verfügbarkeit</h4>
+<p>Verfügbar für Projekte und Kooperationen</p>
+</div>
+</div>
+</div>
+</section>
+<script>
+        // Smooth scrolling and active navigation
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Remove active class from all links
+                document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+                // Add active class to clicked link
+                this.classList.add('active');
+                
+                // Smooth scroll to section
+                const targetId = this.getAttribute('href');
+                document.querySelector(targetId).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Update active navigation on scroll
+        window.addEventListener('scroll', function() {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (scrollY >= (sectionTop - 200)) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Add loading animation
+        window.addEventListener('load', function() {
+            document.body.style.opacity = '0';
+            document.body.style.transition = 'opacity 0.5s ease-in-out';
+            setTimeout(() => {
+                document.body.style.opacity = '1';
+            }, 100);
+        });
+    </script>
+</body>
+</html>
